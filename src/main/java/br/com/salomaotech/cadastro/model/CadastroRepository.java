@@ -10,22 +10,30 @@ import org.springframework.stereotype.Repository;
 public interface CadastroRepository extends JpaRepository<CadastroModel, Long> {
 
     /**
-     * Pesquisa por descricao
+     * Pesquisa por historico
      *
-     * @param descricao Nome
+     * @param historico Histórico
      * @param pageable Paginador
      * @return List com CadastroModel
      */
-    @Query(value = "SELECT * FROM cadastro_model WHERE descricao LIKE %?%", nativeQuery = true)
-    List<CadastroModel> findByDescricao(String descricao, Pageable pageable);
+    @Query(value = "SELECT * FROM cadastro_model WHERE historico LIKE %?%", nativeQuery = true)
+    List<CadastroModel> findByHistorico(String historico, Pageable pageable);
 
     /**
-     * Retorna a quantidade de itens em uma pesquisa por descricao
+     * Retorna a quantidade de itens em uma pesquisa por historico
      *
-     * @param descricao Nome
+     * @param historico Histórico
      * @return Long com a quantidade de itens
      */
-    @Query(value = "SELECT COUNT(id) FROM cadastro_model WHERE descricao LIKE %?%", nativeQuery = true)
-    long findByDescricaoCount(String descricao);
+    @Query(value = "SELECT COUNT(id) FROM cadastro_model WHERE historico LIKE %?%", nativeQuery = true)
+    long findByHistoricoCount(String historico);
+
+    /**
+     * Retorna as contas bancárias disponiveis
+     *
+     * @return
+     */
+    @Query(value = "SELECT DISTINCT CONTA FROM cadastro_model CONTA", nativeQuery = true)
+    List<String> getContas();
 
 }

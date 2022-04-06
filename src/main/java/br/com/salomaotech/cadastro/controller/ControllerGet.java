@@ -36,6 +36,27 @@ public class ControllerGet {
         /* popula com os dados vazios */
         model.addObject("cadastro", new CadastroModel());
 
+        /* popula contas */
+        model.addObject("contas", this.cadastroRepository.getContas());
+
+        /* retorna a página */
+        return model;
+
+    }
+
+    /* Chama a página de cadastro de transferência */
+    @GetMapping("/pagina_cadastro/transferencia")
+    public ModelAndView getCadastraTransferencia() {
+
+        /* nova ModelAndView */
+        ModelAndView model = new ModelAndView("PaginaCadastroTransferencia");
+
+        /* popula com os dados vazios */
+        model.addObject("cadastro", new CadastroModel());
+
+        /* popula contas */
+        model.addObject("contas", this.cadastroRepository.getContas());
+
         /* retorna a página */
         return model;
 
@@ -53,6 +74,9 @@ public class ControllerGet {
 
             /* popula com os dados encontrados no banco de dados */
             model.addObject("cadastro", cadastroRepository.getById(id));
+
+            /* popula contas */
+            model.addObject("contas", this.cadastroRepository.getContas());
 
             /* retorna a página com os dados já populados */
             return model;
@@ -121,15 +145,15 @@ public class ControllerGet {
             paginador = new Paginador(50, request.getParameter("pagina"), this.cadastroRepository.count());
 
             /* popula com os dados encontrados no banco de dados */
-            model.addObject("cadastros", cadastroRepository.findAll(paginador.getPaginadorOrdenadoAsc("descricao")));
+            model.addObject("cadastros", cadastroRepository.findAll(paginador.getPaginadorOrdenadoAsc("historico")));
 
         } else {
 
             /* usa filtro de pesquisa */
-            paginador = new Paginador(50, request.getParameter("pagina"), this.cadastroRepository.findByDescricaoCount(request.getParameter("query")));
+            paginador = new Paginador(50, request.getParameter("pagina"), this.cadastroRepository.findByHistoricoCount(request.getParameter("query")));
 
             /* popula com os dados encontrados no banco de dados */
-            model.addObject("cadastros", cadastroRepository.findByDescricao(request.getParameter("query"), paginador.getPaginadorOrdenadoAsc("descricao")));
+            model.addObject("cadastros", cadastroRepository.findByHistorico(request.getParameter("query"), paginador.getPaginadorOrdenadoAsc("historico")));
 
         }
 

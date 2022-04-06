@@ -55,7 +55,7 @@ public class Paginador {
     /**
      * Retorna o paginador ordenado por Direction.ASC
      *
-     * @param nomeColuna NOome da coluna
+     * @param nomeColuna Nome da coluna
      * @return Página atual
      */
     public Pageable getPaginadorOrdenadoAsc(String nomeColuna) {
@@ -67,7 +67,7 @@ public class Paginador {
     /**
      * Retorna o paginador ordenado por Direction.DESC
      *
-     * @param nomeColuna NOome da coluna
+     * @param nomeColuna Nome da coluna
      * @return Página atual
      */
     public Pageable getPaginadorOrdenadoDesc(String nomeColuna) {

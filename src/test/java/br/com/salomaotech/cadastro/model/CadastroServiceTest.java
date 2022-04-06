@@ -19,7 +19,7 @@ public class CadastroServiceTest {
 
         /* cadastro model */
         CadastroModel cadastroModel = new CadastroModel();
-        cadastroModel.setDescricao("Teste");
+        cadastroModel.setHistorico("Teste");
 
         /* serviço de cadastro */
         CadastroService cadastroService = new CadastroService(cadastroRepository);
@@ -34,7 +34,7 @@ public class CadastroServiceTest {
 
         /* cadastro model */
         CadastroModel cadastroModel = new CadastroModel();
-        cadastroModel.setDescricao("Teste");
+        cadastroModel.setHistorico("Teste");
 
         /* serviço de cadastro */
         CadastroService cadastroService = new CadastroService(cadastroRepository);
@@ -55,7 +55,7 @@ public class CadastroServiceTest {
 
         /* cadastro model */
         CadastroModel cadastroModel = new CadastroModel();
-        cadastroModel.setDescricao("Teste");
+        cadastroModel.setHistorico("Teste");
 
         /* serviço de cadastro */
         CadastroService cadastroService = new CadastroService(cadastroRepository);

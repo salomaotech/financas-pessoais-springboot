@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8" xmlns:th="https://www.thymeleaf.org">
-        <title>Deletar cadastro</title>
+        <title>Cadastro</title>
         <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
         <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
         <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
@@ -49,33 +49,66 @@
         <!-- Conteúdo -->
         <main role="main" class="container mt-3 mb-5">
 
-            <form th:action="@{/deletar/{id}(id=${id})}" th:object="${cadastro}" method="post">
+            <!-- Formulário -->
+            <form th:action="@{/adicionar/transferencia}" th:object="${cadastro}" method="post">
 
                 <!-- Dados pessoais -->
                 <div class="card mb-4">
-                    <div class="card-header bg-danger font-weight-bold mb-3 text-light">Deletar cadastro</div>
+                    <div class="card-header font-weight-bold mb-3">Finanças pessoais</div>
 
                     <div class="pl-3 pr-3">
 
                         <div class="form-row mb-2">
 
+                            <!-- data -->
                             <div class="form-group col-md-2">
                                 <label>Data</label>
-                                <input type="date" th:field="*{dataVencimento}" name="dataVencimento" class="form-control" disabled="">
+                                <input type="date" name="dataVencimento" class="form-control">
                             </div>
 
-                            <div class="form-group col-md-2">
+                            <!--valor R$ -->
+                            <div class="form-group col-md-3">
                                 <label>Valor R$</label>
-                                <input type="text" th:field="*{valor}" name="valor" class="form-control" placeholder="Valor R$" disabled="">
+                                <input type="text" name="valor" class="form-control" placeholder="Valor R$">
+                            </div>
+
+                        </div>
+
+
+                        <!-- historico -->
+                        <div class="form-row mb-2">
+
+                            <div class="form-group col-md-7">
+                                <label>Histórico</label>
+                                <textarea cols="5" rows="4" th:field="*{historico}" name="historico" class="form-control" placeholder="Histórico"></textarea>
                             </div>
 
                         </div>
 
                         <div class="form-row mb-2">
 
-                            <div class="form-group col-md-12">
-                                <label>Histórico</label>
-                                <textarea cols="5" rows="5" th:field="*{historico}" name="historico" class="form-control" placeholder="Histórico" disabled=""></textarea>
+                            <!-- conta origem -->
+                            <div class="form-group col-md-3">
+
+                                <label>Conta bancária origem</label>
+                                <input type="text" name="conta" list="conta" class="form-control">
+                                <datalist id="conta">
+                                    <option value=""></option>
+                                    <option th:each="conta : ${contas}" th:value="${conta}" th:text="${conta}"></option>
+                                </datalist>
+
+                            </div>
+
+                            <!-- conta destino -->
+                            <div class="form-group col-md-3">
+
+                                <label>Conta bancária destino</label>
+                                <input type="text" name="contaDestino" list="contaDestino" class="form-control">
+                                <datalist id="contaDestino">
+                                    <option value=""></option>
+                                    <option th:each="conta : ${contas}" th:value="${conta}" th:text="${conta}"></option>
+                                </datalist>
+
                             </div>
 
                         </div>
@@ -84,16 +117,16 @@
 
                 </div>
 
-                <!-- Confirma deletar cadastro -->
-                <div class="form-row pl-3 pr-3">
+                <!-- Salvar -->
+                <div class="form-row">
 
-                    <div class="form pt-2 mr-3">
-                        <label for="confirma_deletar">Entendido</label>
-                        <input type="checkbox" name="confirma_deletar" id="confirma_deletar">
+                    <div th:if="not ${cadastro.id}" class="form-group col-md-3">
+                        <input type="submit" value="Cadastrar" class="btn btn-success btn-sm">
                     </div>
 
-                    <div class="form-group col-md-3 mt-1">
-                        <input type="submit" value="Deletar" class="btn btn-danger btn-sm">
+                    <div th:if="${cadastro.id}" class="form-group col-md-3">                   
+                        <input type="submit" value="Salvar" class="btn btn-info mr-4 btn-sm">
+                        <a th:href="@{/pagina_deleta/{id}(id=${cadastro.id})}" class="btn text-white bg-danger btn-sm">Deletar</a>
                     </div>
 
                 </div>

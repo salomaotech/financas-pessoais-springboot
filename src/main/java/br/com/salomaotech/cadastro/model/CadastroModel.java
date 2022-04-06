@@ -15,8 +15,10 @@ public class CadastroModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String dataVencimento;
+    private String operacao;
     private double valor;
-    private String descricao;
+    private String historico;
+    private String conta;
 
     public CadastroModel() {
     }
@@ -37,6 +39,14 @@ public class CadastroModel implements Serializable {
         this.dataVencimento = dataVencimento;
     }
 
+    public String getOperacao() {
+        return operacao;
+    }
+
+    public void setOperacao(String operacao) {
+        this.operacao = operacao;
+    }
+
     public double getValor() {
         return valor;
     }
@@ -45,12 +55,20 @@ public class CadastroModel implements Serializable {
         this.valor = valor;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getHistorico() {
+        return historico;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setHistorico(String historico) {
+        this.historico = historico;
+    }
+
+    public String getConta() {
+        return conta;
+    }
+
+    public void setConta(String conta) {
+        this.conta = conta;
     }
 
 }
