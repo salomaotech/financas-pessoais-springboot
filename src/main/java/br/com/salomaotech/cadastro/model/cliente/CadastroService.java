@@ -1,7 +1,13 @@
-package br.com.salomaotech.cadastro.model;
+package br.com.salomaotech.cadastro.model.cliente;
 
 import org.springframework.stereotype.Service;
 
+/**
+ * Classe de serviço adicionar, excluir, atualizar registros do banco de dados
+ * etc
+ *
+ * @author @salomaotech
+ */
 @Service
 public class CadastroService {
 

@@ -1,15 +1,22 @@
 package br.com.salomaotech.cadastro.controller;
 
-import br.com.salomaotech.cadastro.model.CadastroModel;
+import br.com.salomaotech.cadastro.model.cliente.CadastroModel;
 import static java.util.Objects.isNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
-import br.com.salomaotech.cadastro.model.CadastroRepository;
-import br.com.salomaotech.cadastro.model.CadastroService;
+import br.com.salomaotech.cadastro.model.cliente.CadastroRepository;
+import br.com.salomaotech.cadastro.model.cliente.CadastroService;
+import java.time.LocalDate;
+import java.util.Calendar;
 
+/**
+ * Lida com os endpoints de Post
+ *
+ * @author @salomaotech
+ */
 @Controller
 public class ControllerPost {
 
@@ -22,6 +29,9 @@ public class ControllerPost {
 
         /* serviço */
         CadastroService cadastroService = new CadastroService(cadastroRepository);
+
+        /* seta data do registro */
+        cadastroModel.setDataRegistro(LocalDate.now());
 
         /* valida se conseguiu adicionar */
         if (cadastroService.adicionar(cadastroModel)) {
@@ -37,7 +47,7 @@ public class ControllerPost {
 
     }
 
-    /* mapeia a rota para adicionar um registro */
+    /* mapeia a rota para adicionar um registro (transferencia entre contas) */
     @PostMapping("/adicionar/transferencia")
     public String postAdicionaTransferencia(CadastroModel cadastroModel, WebRequest request) {
 
@@ -47,16 +57,24 @@ public class ControllerPost {
         /* seta a operação */
         cadastroModel.setOperacao("saida");
 
+        /* seta a categoria */
+        cadastroModel.setCategoria("Transferência");
+
+        /* seta data do registro */
+        cadastroModel.setDataRegistro(LocalDate.now());
+
         /* valida se conseguiu adicionar */
         if (cadastroService.adicionar(cadastroModel)) {
 
             /* conta de destino */
             CadastroModel contaDestino = new CadastroModel();
-            contaDestino.setConta(request.getParameter(("contaDestino")));
+            contaDestino.setDataRegistro(cadastroModel.getDataRegistro());
             contaDestino.setDataVencimento(cadastroModel.getDataVencimento());
+            contaDestino.setConta(request.getParameter(("contaDestino")));
             contaDestino.setOperacao("entrada");
             contaDestino.setHistorico(cadastroModel.getHistorico());
             contaDestino.setValor(cadastroModel.getValor());
+            contaDestino.setCategoria("Transferência");
 
             /* adiciona */
             cadastroService.adicionar(contaDestino);
@@ -78,6 +96,9 @@ public class ControllerPost {
 
         /* serviço */
         CadastroService cadastroService = new CadastroService(cadastroRepository);
+
+        /* seta data do registro */
+        cadastroModel.setDataRegistro(LocalDate.now());
 
         /* valida se conseguiu atualizar */
         if (cadastroService.atualizar(id, cadastroModel)) {

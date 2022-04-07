@@ -1,4 +1,4 @@
-package br.com.salomaotech.cadastro.model;
+package br.com.salomaotech.cadastro.model.sistema;
 
 import java.util.ArrayList;
 import org.springframework.data.domain.PageRequest;
@@ -6,6 +6,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 
+/**
+ * Constroe um paginador para o Repository
+ *
+ * @author @salomaotech
+ */
 public class Paginador {
 
     private final int numeroItensPorPagina;

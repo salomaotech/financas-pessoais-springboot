@@ -1,5 +1,6 @@
 package br.com.salomaotech.cadastro.model;
 
+import br.com.salomaotech.cadastro.model.sistema.Paginador;
 import static java.util.Objects.isNull;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

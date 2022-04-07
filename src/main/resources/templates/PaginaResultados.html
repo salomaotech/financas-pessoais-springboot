@@ -66,14 +66,13 @@
                 <tr th:each="cadastro : ${cadastros}">
                     <td>
                         <a th:href="@{/pagina_cadastro/{id}(id=${cadastro.id}, (operacao=${cadastro.operacao}))}" th:text="${cadastro.id}"></a></td>
-                    <td th:text="${cadastro.dataVencimento}"></td>
+                    <td th:text="${#temporals.format(cadastro.dataVencimento, 'dd-MM-yyyy')}"></td>
                     <td th:text="${cadastro.valor}"></td>
                     <td th:text="${cadastro.conta}"></td>
                     <td th:text="${cadastro.historico}"></td>
                 </tr>
 
             </table>
-
 
             <!-- Formulário -->
             <form th:action="@{/pagina_resultados/}" method="request" class="mt-5 mb-5">

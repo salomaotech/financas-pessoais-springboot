@@ -1,5 +1,8 @@
 package br.com.salomaotech.cadastro.model;
 
+import br.com.salomaotech.cadastro.model.cliente.CadastroService;
+import br.com.salomaotech.cadastro.model.cliente.CadastroRepository;
+import br.com.salomaotech.cadastro.model.cliente.CadastroModel;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.springframework.beans.factory.annotation.Autowired;

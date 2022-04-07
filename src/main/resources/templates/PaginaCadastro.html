@@ -105,6 +105,17 @@
 
                         <div class="form-row mb-2">
 
+                            <div class="form-group col-md-4">
+
+                                <label>Categoria ex: Aluguel, Alimentação etc.</label>
+                                <input type="text" name="categoria" th:value="*{categoria}" list="categoria" class="form-control">
+                                <datalist id="categoria">
+                                    <option value=""></option>
+                                    <option th:each="categoria : ${categorias}" th:value="${categoria}" th:text="${categoria}"></option>
+                                </datalist>
+
+                            </div>
+
                             <div class="form-group col-md-3">
 
                                 <label>Conta bancária</label>

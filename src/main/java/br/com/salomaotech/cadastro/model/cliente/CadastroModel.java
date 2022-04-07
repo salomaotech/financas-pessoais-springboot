@@ -1,11 +1,21 @@
-package br.com.salomaotech.cadastro.model;
+package br.com.salomaotech.cadastro.model.cliente;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+/**
+ * Modelo da entidade de cadastro
+ *
+ * @author @salomaotech
+ */
 @Entity
 public class CadastroModel implements Serializable {
 
@@ -14,11 +24,18 @@ public class CadastroModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String dataVencimento;
+
+    @DateTimeFormat(iso = ISO.DATE)
+    private LocalDate dataRegistro;
+
+    @DateTimeFormat(iso = ISO.DATE)
+    private LocalDate dataVencimento;
+
     private String operacao;
-    private double valor;
     private String historico;
+    private String categoria;
     private String conta;
+    private String valor;
 
     public CadastroModel() {
     }
@@ -31,11 +48,19 @@ public class CadastroModel implements Serializable {
         this.id = id;
     }
 
-    public String getDataVencimento() {
+    public LocalDate getDataRegistro() {
+        return dataRegistro;
+    }
+
+    public void setDataRegistro(LocalDate dataRegistro) {
+        this.dataRegistro = dataRegistro;
+    }
+
+    public LocalDate getDataVencimento() {
         return dataVencimento;
     }
 
-    public void setDataVencimento(String dataVencimento) {
+    public void setDataVencimento(LocalDate dataVencimento) {
         this.dataVencimento = dataVencimento;
     }
 
@@ -47,14 +72,6 @@ public class CadastroModel implements Serializable {
         this.operacao = operacao;
     }
 
-    public double getValor() {
-        return valor;
-    }
-
-    public void setValor(double valor) {
-        this.valor = valor;
-    }
-
     public String getHistorico() {
         return historico;
     }
@@ -63,12 +80,28 @@ public class CadastroModel implements Serializable {
         this.historico = historico;
     }
 
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
     public String getConta() {
         return conta;
     }
 
     public void setConta(String conta) {
         this.conta = conta;
+    }
+
+    public String getValor() {
+        return valor;
+    }
+
+    public void setValor(String valor) {
+        this.valor = valor;
     }
 
 }
