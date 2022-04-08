@@ -51,47 +51,32 @@
         <main role="main" class="container mt-3 mb-5">
 
             <!-- Formulário -->
-            <form th:action="@{/adicionar/transferencia}" th:object="${cadastro}" method="post">
+            <form th:action="@{/pagina_resultados}" method="get">
 
-                <!-- Dados pessoais -->
+                <!-- Campos -->
                 <div class="card mb-4">
-                    <div class="card-header font-weight-bold mb-3">Finanças pessoais</div>
+                    <div class="card-header font-weight-bold mb-3">Finanças pessoais - Busca avançada</div>
 
                     <div class="pl-3 pr-3">
 
                         <div class="form-row mb-2">
 
-                            <!-- data -->
+                            <!-- Data de inicio -->
                             <div class="form-group col-md-2">
-                                <label>Data</label>
-                                <input type="date" name="dataVencimento" class="form-control">
+                                <label>Data início</label>
+                                <input type="date" name="dataInicio" class="form-control">
                             </div>
 
-                            <!--valor R$ -->
-                            <div class="form-group col-md-3">
-                                <label>Valor R$</label>
-                                <input type="text" name="valor" class="form-control" placeholder="Valor R$">
+
+                            <!-- Data de fim -->
+                            <div class="form-group col-md-2">
+                                <label>Data fim</label>
+                                <input type="date" name="dataFim" class="form-control">
                             </div>
 
-                        </div>
-
-
-                        <!-- historico -->
-                        <div class="form-row mb-2">
-
-                            <div class="form-group col-md-7">
-                                <label>Histórico</label>
-                                <textarea cols="5" rows="4" th:field="*{historico}" name="historico" class="form-control" placeholder="Histórico"></textarea>
-                            </div>
-
-                        </div>
-
-                        <div class="form-row mb-2">
-
-                            <!-- conta origem -->
                             <div class="form-group col-md-3">
 
-                                <label>Conta origem</label>
+                                <label>Conta</label>
                                 <input type="text" name="conta" list="conta" class="form-control">
                                 <datalist id="conta">
                                     <option value=""></option>
@@ -100,14 +85,17 @@
 
                             </div>
 
-                            <!-- conta destino -->
-                            <div class="form-group col-md-3">
+                        </div>
 
-                                <label>Conta destino</label>
-                                <input type="text" name="contaDestino" list="contaDestino" class="form-control">
-                                <datalist id="contaDestino">
+                        <div class="form-row mb-2">
+
+                            <div class="form-group col-md-4">
+
+                                <label>Categoria</label>
+                                <input type="text" name="categoria" list="categoria" class="form-control">
+                                <datalist id="categoria">
                                     <option value=""></option>
-                                    <option th:each="conta : ${contas}" th:value="${conta}" th:text="${conta}"></option>
+                                    <option th:each="categoria : ${categorias}" th:value="${categoria}" th:text="${categoria}"></option>
                                 </datalist>
 
                             </div>
@@ -121,13 +109,8 @@
                 <!-- Salvar -->
                 <div class="form-row">
 
-                    <div th:if="not ${cadastro.id}" class="form-group col-md-3">
-                        <input type="submit" value="Cadastrar" class="btn btn-success btn-sm">
-                    </div>
-
-                    <div th:if="${cadastro.id}" class="form-group col-md-3">                   
-                        <input type="submit" value="Salvar" class="btn btn-info mr-4 btn-sm">
-                        <a th:href="@{/pagina_deleta/{id}(id=${cadastro.id})}" class="btn text-white bg-danger btn-sm">Deletar</a>
+                    <div class="form-group col-md-3">
+                        <input type="submit" value="Buscar" class="btn btn-success btn-sm">
                     </div>
 
                 </div>

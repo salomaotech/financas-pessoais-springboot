@@ -31,7 +31,7 @@
                             <a class="dropdown-item" href="/pagina_cadastro?operacao=entrada">Cadastrar - Entrada</a>
                             <a class="dropdown-item" href="/pagina_cadastro?operacao=saida">Cadastrar - Saída</a>
                             <a class="dropdown-item" href="/pagina_cadastro/transferencia">Cadastrar - Transferência</a>
-                            <a class="dropdown-item" href="/pagina_resultados">Lançamentos</a>
+                            <a class="dropdown-item" href="/pagina_busca_avancada">Busca avançada</a>
                         </div>
 
                     </li>
@@ -39,7 +39,8 @@
                 </ul>
 
                 <form action="/" class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Buscar" name="query" th:value="${query}" aria-label="Buscar">
+                    <input type="date" name="dataInicio" th:value="${param.dataInicio}" class="form-control mr-3">
+                    <input type="date" name="dataFim" th:value="${param.dataFim}" class="form-control mr-3">
                     <button class="btn btn btn-light my-2 my-sm-0" type="submit">Buscar</button>
                 </form>
 
@@ -49,16 +50,21 @@
         <!-- Conteúdo -->
         <main role="main" class="container mt-5">
 
+            <div class="card mb-4">
+                <div class="card-header font-weight-bold mb-3 h4">Saldo R$</div>
+                <span th:text="${saldo}" class="pl-3 pr-3 pb-3 h4"></span>
+            </div>
+
             <table class="table">
 
                 <thead class="bg-light">
 
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Data</th>
-                        <th scope="col">Valor R$</th>
+                        <th scope="col">Data</th>                   
                         <th scope="col">Conta</th>
-                        <th scope="col">Histórico</th>
+                        <th scope="col">Categoria</th>
+                        <th scope="col">Valor R$</th>
                     </tr>
 
                 </thead>
@@ -66,16 +72,23 @@
                 <tr th:each="cadastro : ${cadastros}">
                     <td>
                         <a th:href="@{/pagina_cadastro/{id}(id=${cadastro.id}, (operacao=${cadastro.operacao}))}" th:text="${cadastro.id}"></a></td>
-                    <td th:text="${#temporals.format(cadastro.dataVencimento, 'dd-MM-yyyy')}"></td>
-                    <td th:text="${cadastro.valor}"></td>
+                    <td th:text="${#temporals.format(cadastro.dataVencimento, 'dd-MM-yyyy')}"></td>                  
                     <td th:text="${cadastro.conta}"></td>
-                    <td th:text="${cadastro.historico}"></td>
+                    <td th:text="${cadastro.categoria}"></td>
+                    <td th:text="${cadastro.valor}" th:if="${cadastro.operacao == 'entrada'}" class="text-success"></td>
+                    <td th:text="${'-' + cadastro.valor}" th:if="${cadastro.operacao == 'saida'}" class="text-danger"></td>
                 </tr>
 
             </table>
 
             <!-- Formulário -->
             <form th:action="@{/pagina_resultados/}" method="request" class="mt-5 mb-5">
+
+                <!-- campos ocultos de pesquisa -->
+                <input type="hidden" name="dataInicio" th:value="${param.dataInicio}">
+                <input type="hidden" name="dataFim" th:value="${param.dataFim}">
+                <input type="hidden" name="conta" th:value="${param.conta}">
+                <input type="hidden" name="categoria" th:value="${param.categoria}">
 
                 <div class="form-row">
 

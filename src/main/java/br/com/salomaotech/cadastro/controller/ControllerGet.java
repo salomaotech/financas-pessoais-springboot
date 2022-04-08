@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 import br.com.salomaotech.cadastro.model.cliente.CadastroRepository;
-import br.com.salomaotech.cadastro.model.sistema.FormataParaMoedaBrasileira;
+import br.com.salomaotech.cadastro.model.sistema.ValidaStringIsEmpty;
+import br.com.salomaotech.cadastro.model.sistema.FormataNumero;
 import br.com.salomaotech.cadastro.model.sistema.Paginador;
+import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.List;
 import static java.util.Objects.isNull;
@@ -128,6 +130,22 @@ public class ControllerGet {
 
     }
 
+    /* mapeia a rota para pesquisa avançada */
+    @GetMapping("/pagina_busca_avancada")
+    public ModelAndView getPesquisaAvancada() {
+
+        /* nova ModelAndView */
+        ModelAndView model = new ModelAndView("PaginaBuscaAvancada");
+
+        /* popula contas, categorias */
+        model.addObject("contas", this.cadastroRepository.getContas());
+        model.addObject("categorias", this.cadastroRepository.getCategorias());
+
+        /* retorna a página com os dados já populados */
+        return model;
+
+    }
+
     /* mapeia a rota para a página PaginaResultados */
     @GetMapping({"/", "/pagina_resultados"})
     public ModelAndView getResultados(WebRequest request) {
@@ -138,38 +156,64 @@ public class ControllerGet {
         /* paginador */
         Paginador paginador;
 
-        /* informa se irá usar a pesquisa */
-        boolean isPesquisa = false;
-
         /* resultados */
         List resultados;
 
-        /* excessão */
-        try {
-
-            /* se o parametro for diferente de vazio e nulo então está pesquisando */
-            isPesquisa = !request.getParameter("query").isEmpty() & !isNull(request.getParameter("query"));
-
-        } catch (java.lang.NullPointerException ex) {
-
-        }
+        /* valores monetários */
+        BigDecimal entradas;
+        BigDecimal saidas;
 
         /* valida parametro */
-        if (!isPesquisa) {
+        if (request.getParameterMap().isEmpty()) {
 
             /* não usa filtro de pesquisa */
             paginador = new Paginador(50, request.getParameter("pagina"), this.cadastroRepository.count());
 
             /* resultados */
-            resultados = cadastroRepository.findAllList(paginador.getPaginadorOrdenadoAsc("historico"));
+            resultados = cadastroRepository.findAllList(paginador.getPaginadorOrdenadoAsc("data_vencimento"));
+
+            /* entrada e saída */
+            entradas = cadastroRepository.findAllSaldo("entrada");
+            saidas = cadastroRepository.findAllSaldo("saida");
 
         } else {
 
+            /* filtros de busca */
+            String dataInicio = request.getParameter("dataInicio");
+            String dataFim = request.getParameter("dataFim");
+            String categoria = request.getParameter("categoria");
+            String conta = request.getParameter("conta");
+
+            /* valida se a data do fim está em branco */
+            if (ValidaStringIsEmpty.isEmpty(dataFim)) {
+
+                dataFim = dataInicio;
+
+            }
+
+            /* valida se a categoria está em branco */
+            if (ValidaStringIsEmpty.isEmpty(categoria)) {
+
+                categoria = "";
+
+            }
+
+            /* valida se a conta está em branco */
+            if (ValidaStringIsEmpty.isEmpty(conta)) {
+
+                conta = "";
+
+            }
+
             /* usa filtro de pesquisa */
-            paginador = new Paginador(50, request.getParameter("pagina"), this.cadastroRepository.findByHistoricoCount(request.getParameter("query")));
+            paginador = new Paginador(50, request.getParameter("pagina"), this.cadastroRepository.findByHistoricoCount(dataInicio, dataFim, conta, categoria));
 
             /* resultados */
-            resultados = cadastroRepository.findByHistorico(request.getParameter("query"), paginador.getPaginadorOrdenadoAsc("historico"));
+            resultados = cadastroRepository.findByHistorico(dataInicio, dataFim, conta, categoria, paginador.getPaginadorOrdenadoAsc("data_vencimento"));
+
+            /* entrada e saída */
+            entradas = cadastroRepository.findByHistoricoSaldo(dataInicio, dataFim, conta, categoria, "entrada");
+            saidas = cadastroRepository.findByHistoricoSaldo(dataInicio, dataFim, conta, categoria, "saida");
 
         }
 
@@ -183,7 +227,21 @@ public class ControllerGet {
             CadastroModel cadastro = (CadastroModel) it.next();
 
             /* formata o valor para moeda brasileira R$ */
-            cadastro.setValor(FormataParaMoedaBrasileira.cifrar(cadastro.getValor()));
+            cadastro.setValor(FormataNumero.formatarNumeroParaBr(cadastro.getValor()));
+
+        }
+
+        /* valida entradas */
+        if (isNull(entradas)) {
+
+            entradas = new BigDecimal("0");
+
+        }
+
+        /* valida saidas */
+        if (isNull(saidas)) {
+
+            saidas = new BigDecimal("0");
 
         }
 
@@ -191,6 +249,7 @@ public class ControllerGet {
         model.addObject("numero_paginas", paginador.getArrayListNumeroPaginas());
         model.addObject("pagina", request.getParameter("pagina"));
         model.addObject("query", request.getParameter("query"));
+        model.addObject("saldo", FormataNumero.formatarNumeroParaBr(entradas.subtract(saidas).toString()));
 
         /* retorna a página com os dados já populados */
         return model;

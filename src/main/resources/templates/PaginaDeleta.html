@@ -31,7 +31,7 @@
                             <a class="dropdown-item" href="/pagina_cadastro?operacao=entrada">Cadastrar - Entrada</a>
                             <a class="dropdown-item" href="/pagina_cadastro?operacao=saida">Cadastrar - Saída</a>
                             <a class="dropdown-item" href="/pagina_cadastro/transferencia">Cadastrar - Transferência</a>
-                            <a class="dropdown-item" href="/pagina_resultados">Lançamentos</a>
+                            <a class="dropdown-item" href="/pagina_busca_avancada">Busca avançada</a>
                         </div>
 
                     </li>
@@ -39,7 +39,8 @@
                 </ul>
 
                 <form action="/" class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Buscar" name="query" th:value="${query}" aria-label="Buscar">
+                    <input type="date" name="dataInicio" th:value="${param.dataInicio}" class="form-control mr-3">
+                    <input type="date" name="dataFim" th:value="${param.dataFim}" class="form-control mr-3">
                     <button class="btn btn btn-light my-2 my-sm-0" type="submit">Buscar</button>
                 </form>
 

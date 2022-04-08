@@ -33,6 +33,12 @@ public class ControllerGetTest {
     }
 
     @Test
+    public void testGetCadastraTransferencia() throws Exception {
+
+        this.mockMvc.perform(get("/pagina_cadastro/transferencia")).andDo(print()).andExpect(status().isOk());
+    }
+
+    @Test
     public void testGetAtualiza() throws Exception {
 
         /* testa se a model está funcionando */
@@ -45,6 +51,14 @@ public class ControllerGetTest {
 
         /* testa se a model está funcionando */
         this.mockMvc.perform(get("/pagina_deleta/1")).andDo(print()).andExpect(status().isOk());
+
+    }
+
+    @Test
+    public void testGetPesquisaAvancada() throws Exception {
+
+        /* testa se a model está funcionando */
+        this.mockMvc.perform(get("/pagina_busca_avancada")).andDo(print()).andExpect(status().isOk());
 
     }
 

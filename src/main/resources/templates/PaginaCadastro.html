@@ -29,9 +29,9 @@
 
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="/pagina_cadastro?operacao=entrada">Cadastrar - Entrada</a>
-                            <a class="dropdown-item" href="/pagina_cadastro?operacao=saida">Cadastrar - Saída</a>
+                            <a class="dropdown-item" href="/pagina_cadastro?operacao=saida">Cadastrar - Saida</a>
                             <a class="dropdown-item" href="/pagina_cadastro/transferencia">Cadastrar - Transferência</a>
-                            <a class="dropdown-item" href="/pagina_resultados">Lançamentos</a>
+                            <a class="dropdown-item" href="/pagina_busca_avancada">Busca avançada</a>
                         </div>
 
                     </li>
@@ -39,7 +39,8 @@
                 </ul>
 
                 <form action="/" class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Buscar" name="query" th:value="${query}" aria-label="Buscar">
+                    <input type="date" name="dataInicio" th:value="${param.dataInicio}" class="form-control mr-3">
+                    <input type="date" name="dataFim" th:value="${param.dataFim}" class="form-control mr-3">
                     <button class="btn btn btn-light my-2 my-sm-0" type="submit">Buscar</button>
                 </form>
 
@@ -75,12 +76,12 @@
                                         <option th:if="${#request.getParameter('operacao') == 'saida'}" th:value="saida" th:text="Saida" selected></option>
 
                                         <option th:if="*{operacao == 'entrada'}" th:value="entrada" th:text="Entrada" selected></option>
-                                        <option th:if="*{operacao == 'saida'}" th:value="saida" th:text="Saída" selected></option>
+                                        <option th:if="*{operacao == 'saida'}" th:value="saida" th:text="Saida" selected></option>
                                     </optgroup>
 
                                     <optgroup label="Opções">
                                         <option value="entrada">Entrada</option>
-                                        <option value="saida">Saída</option>
+                                        <option value="saida">Saida</option>
                                     </optgroup>
 
                                 </select>
@@ -107,7 +108,7 @@
 
                             <div class="form-group col-md-4">
 
-                                <label>Categoria ex: Aluguel, Alimentação etc.</label>
+                                <label>Categoria</label>
                                 <input type="text" name="categoria" th:value="*{categoria}" list="categoria" class="form-control">
                                 <datalist id="categoria">
                                     <option value=""></option>
@@ -118,7 +119,7 @@
 
                             <div class="form-group col-md-3">
 
-                                <label>Conta bancária</label>
+                                <label>Conta</label>
                                 <input type="text" name="conta" th:value="*{conta}" list="conta" class="form-control">
                                 <datalist id="conta">
                                     <option value=""></option>

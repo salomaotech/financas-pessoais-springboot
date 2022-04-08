@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 import br.com.salomaotech.cadastro.model.cliente.CadastroRepository;
 import br.com.salomaotech.cadastro.model.cliente.CadastroService;
+import br.com.salomaotech.cadastro.model.sistema.FormataNumero;
 import java.time.LocalDate;
-import java.util.Calendar;
 
 /**
  * Lida com os endpoints de Post
@@ -29,6 +29,9 @@ public class ControllerPost {
 
         /* serviço */
         CadastroService cadastroService = new CadastroService(cadastroRepository);
+
+        /* formata o valor corretamente com as casas decimais */
+        cadastroModel.setValor(FormataNumero.formatarNumero(cadastroModel.getValor()).toString());
 
         /* seta data do registro */
         cadastroModel.setDataRegistro(LocalDate.now());
@@ -53,6 +56,9 @@ public class ControllerPost {
 
         /* serviço */
         CadastroService cadastroService = new CadastroService(cadastroRepository);
+
+        /* formata o valor corretamente com as casas decimais */
+        cadastroModel.setValor(FormataNumero.formatarNumero(cadastroModel.getValor()).toString());
 
         /* seta a operação */
         cadastroModel.setOperacao("saida");
@@ -96,6 +102,9 @@ public class ControllerPost {
 
         /* serviço */
         CadastroService cadastroService = new CadastroService(cadastroRepository);
+
+        /* formata o valor corretamente com as casas decimais */
+        cadastroModel.setValor(FormataNumero.formatarNumero(cadastroModel.getValor()).toString());
 
         /* seta data do registro */
         cadastroModel.setDataRegistro(LocalDate.now());

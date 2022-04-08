@@ -1,4 +1,4 @@
-package br.com.salomaotech.cadastro.model;
+package br.com.salomaotech.cadastro.model.sistema;
 
 import br.com.salomaotech.cadastro.model.sistema.Paginador;
 import static java.util.Objects.isNull;

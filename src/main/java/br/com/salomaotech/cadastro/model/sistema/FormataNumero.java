@@ -4,11 +4,11 @@ import java.math.BigDecimal;
 import java.text.NumberFormat;
 
 /**
- * Cifra para moeda brasileira estilo R$ 299,99
+ * Formatador de numeros
  *
  * @author @salomaotech
  */
-public class FormataParaMoedaBrasileira {
+public class FormataNumero {
 
     /**
      * Converte para BigDecimal
@@ -16,7 +16,7 @@ public class FormataParaMoedaBrasileira {
      * @param numero Número a ser formatado
      * @return Retorna o valor no formato BigDecimal
      */
-    private static BigDecimal converterParaBigDecimal(String numero) {
+    public static BigDecimal formatarNumero(String numero) {
 
         /* excessão */
         try {
@@ -36,12 +36,12 @@ public class FormataParaMoedaBrasileira {
             numero = numeroConvertido.replace(",", ".");
 
             /* retorno */
-            return new BigDecimal(String.valueOf(numero));
+            return new BigDecimal(numero);
 
         } catch (java.lang.NumberFormatException | java.lang.NullPointerException | java.lang.ClassCastException ex) {
 
             /* retorno */
-            return new BigDecimal(0);
+            return new BigDecimal("0");
 
         }
 
@@ -53,13 +53,13 @@ public class FormataParaMoedaBrasileira {
      * @param numero Número a ser cifrado
      * @return Número no formato R$ 299,99
      */
-    public static String cifrar(String numero) {
+    public static String formatarNumeroParaBr(String numero) {
 
         /* trata excessão */
         try {
 
             /* BigDecimal */
-            BigDecimal valor = converterParaBigDecimal(numero);
+            BigDecimal valor = formatarNumero(numero);
 
             /* formata o numero */
             NumberFormat nf = NumberFormat.getCurrencyInstance();

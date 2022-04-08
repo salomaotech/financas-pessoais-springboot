@@ -1,4 +1,4 @@
-package br.com.salomaotech.cadastro.model;
+package br.com.salomaotech.cadastro.model.cliente;
 
 import br.com.salomaotech.cadastro.model.cliente.CadastroService;
 import br.com.salomaotech.cadastro.model.cliente.CadastroRepository;
@@ -71,6 +71,40 @@ public class CadastroServiceTest {
 
         /* agora verifica se consegue deletar com o id de cadastro */
         assertEquals(true, cadastroService.deletar(id));
+
+    }
+
+    @Test
+    public void testGetId() {
+
+        /* cadastro model */
+        CadastroModel cadastroModel = new CadastroModel();
+        cadastroModel.setHistorico("Teste");
+
+        /* serviço de cadastro */
+        CadastroService cadastroService = new CadastroService(cadastroRepository);
+
+        /* adiciona registro */
+        cadastroService.adicionar(cadastroModel);
+
+        /* testa se ao ter adicionado gerou um id , se for zero deu erro */
+        assertEquals(true, cadastroService.getId() != 0);
+
+        /* adiciona novo registro e pega o id do novo registro */
+        cadastroService.adicionar(cadastroModel);
+        long id = cadastroService.getId();
+
+        /* atualiza o registro */
+        cadastroService.atualizar(id, cadastroModel);
+
+        /* verifica se o id ainda é o mesmo, se não for deu erro */
+        assertEquals(true, id == cadastroService.getId());
+
+        /* deleta o registro */
+        cadastroService.deletar(id);
+
+        /* verifica se o id ainda é o mesmo, se não for deu erro */
+        assertEquals(true, id == cadastroService.getId());
 
     }
 

@@ -20,7 +20,15 @@ public class ControllerPostTest {
     public void testPostAdiciona() throws Exception {
 
         /* testa o redirecionamento */
-        this.mockMvc.perform(post("/adicionar").param("nome", "Teste Nome").param("cpf", "000.000.000-00")).andDo(print()).andExpect(status().is(302));
+        this.mockMvc.perform(post("/adicionar").param("DataVencimento", "1989-09-15").param("valor", "100.00").param("historico", "Teste unitário cadastro")).andDo(print()).andExpect(status().is(302));
+
+    }
+
+    @Test
+    public void testPostAdicionaTransferencia() throws Exception {
+
+        /* testa o redirecionamento */
+        this.mockMvc.perform(post("/adicionar/transferencia").param("conta", "000001").param("contaDestino", "000002").param("DataVencimento", "1989-09-15").param("valor", "100.00").param("historico", "Teste unitário transferência")).andDo(print()).andExpect(status().is(302));
 
     }
 
