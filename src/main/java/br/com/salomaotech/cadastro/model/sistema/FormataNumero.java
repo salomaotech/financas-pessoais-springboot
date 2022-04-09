@@ -21,19 +21,25 @@ public class FormataNumero {
         /* excessão */
         try {
 
-            /* número convertido */
-            String numeroConvertido = numero;
+            /* converte todas as virgulas para ponto */
+            numero = numero.replace(",", ".");
 
-            /* se houver ponto e virgula remove o ponto separador de milhar exemplo 1.500,36 vira 1500,36*/
-            if (numero.contains(".") & numero.contains(",")) {
+            /* valida se o número contém parte decimal */
+            if (numero.contains(".")) {
 
-                /* remove o ponto */
-                numeroConvertido = numero.replace(".", "");
+                /* pega a parte decimal */
+                String decimal = numero.substring(numero.lastIndexOf("."), numero.length());
+
+                /* pega o número sem a parte decimal */
+                numero = numero.substring(0, numero.lastIndexOf("."));
+
+                /* remove todos os pontos do número para torna-lo inteiro */
+                numero = numero.replace(".", "");
+
+                /* adiciona a parte decimal que faltava */
+                numero += decimal;
 
             }
-
-            /* converte a virgula em ponto para separar números quebrados */
-            numero = numeroConvertido.replace(",", ".");
 
             /* retorno */
             return new BigDecimal(numero);

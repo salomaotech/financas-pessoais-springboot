@@ -1,8 +1,5 @@
 package br.com.salomaotech.cadastro.model.cliente;
 
-import br.com.salomaotech.cadastro.model.cliente.CadastroService;
-import br.com.salomaotech.cadastro.model.cliente.CadastroRepository;
-import br.com.salomaotech.cadastro.model.cliente.CadastroModel;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,12 +84,11 @@ public class CadastroServiceTest {
         /* adiciona registro */
         cadastroService.adicionar(cadastroModel);
 
-        /* testa se ao ter adicionado gerou um id , se for zero deu erro */
-        assertEquals(true, cadastroService.getId() != 0);
-
-        /* adiciona novo registro e pega o id do novo registro */
-        cadastroService.adicionar(cadastroModel);
+        /* pega o id */
         long id = cadastroService.getId();
+
+        /* testa se ao ter adicionado gerou um id , se for zero deu erro */
+        assertEquals(true, id != 0);
 
         /* atualiza o registro */
         cadastroService.atualizar(id, cadastroModel);

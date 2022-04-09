@@ -26,23 +26,24 @@ public class Paginador {
      */
     public Paginador(int numeroItensPorPagina, String numeroPaginaAtual, long numeroRegistrosTabela) {
 
-        int pgAtual;
+        /* página atual */
+        int paginaAtual;
 
         /* excessão */
         try {
 
-            pgAtual = Integer.parseInt(numeroPaginaAtual);
+            paginaAtual = Integer.parseInt(numeroPaginaAtual);
 
         } catch (java.lang.NumberFormatException ex) {
 
-            pgAtual = 0;
+            paginaAtual = 0;
 
         }
 
         /* popula */
         this.numeroItensPorPagina = numeroItensPorPagina;
         this.numeroRegistrosTabela = numeroRegistrosTabela;
-        this.numeroPaginaAtual = pgAtual;
+        this.numeroPaginaAtual = paginaAtual;
 
     }
 

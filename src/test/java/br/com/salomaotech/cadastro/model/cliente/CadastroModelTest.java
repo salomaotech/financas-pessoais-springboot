@@ -1,6 +1,5 @@
 package br.com.salomaotech.cadastro.model.cliente;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,152 +9,144 @@ public class CadastroModelTest {
     @Test
     public void testGetId() {
 
-        CadastroModel instance = new CadastroModel();
-        long expResult = 0L;
-        long result = instance.getId();
-        assertEquals(expResult, result);
+        CadastroModel cadastroModel = new CadastroModel();
+        cadastroModel.setId(0L);
+        assertEquals(true, cadastroModel.getId() == 0L);
 
     }
 
     @Test
     public void testSetId() {
 
-        long id = 0L;
-        CadastroModel instance = new CadastroModel();
-        instance.setId(id);
+        CadastroModel cadastroModel = new CadastroModel();
+        cadastroModel.setId(0L);
+        assertEquals(true, cadastroModel.getId() == 0L);
 
     }
 
     @Test
     public void testGetDataRegistro() {
 
-        CadastroModel instance = new CadastroModel();
-        LocalDate expResult = null;
-        LocalDate result = instance.getDataRegistro();
-        assertEquals(expResult, result);
+        CadastroModel cadastroModel = new CadastroModel();
+        cadastroModel.setDataRegistro(LocalDate.now());
+        assertEquals(true, LocalDate.now().equals(cadastroModel.getDataRegistro()));
 
     }
 
     @Test
     public void testSetDataRegistro() {
 
-        LocalDate dataRegistro = null;
-        CadastroModel instance = new CadastroModel();
-        instance.setDataRegistro(dataRegistro);
+        CadastroModel cadastroModel = new CadastroModel();
+        cadastroModel.setDataRegistro(LocalDate.now());
+        assertEquals(true, LocalDate.now().equals(cadastroModel.getDataRegistro()));
 
     }
 
     @Test
     public void testGetDataVencimento() {
 
-        CadastroModel instance = new CadastroModel();
-        LocalDate expResult = null;
-        LocalDate result = instance.getDataVencimento();
-        assertEquals(expResult, result);
+        CadastroModel cadastroModel = new CadastroModel();
+        cadastroModel.setDataVencimento(LocalDate.now());
+        assertEquals(true, LocalDate.now().equals(cadastroModel.getDataVencimento()));
 
     }
 
     @Test
     public void testSetDataVencimento() {
 
-        LocalDate dataVencimento = null;
-        CadastroModel instance = new CadastroModel();
-        instance.setDataVencimento(dataVencimento);
+        CadastroModel cadastroModel = new CadastroModel();
+        cadastroModel.setDataVencimento(LocalDate.now());
+        assertEquals(true, LocalDate.now().equals(cadastroModel.getDataVencimento()));
 
     }
 
     @Test
     public void testGetOperacao() {
 
-        CadastroModel instance = new CadastroModel();
-        String expResult = null;
-        String result = instance.getOperacao();
-        assertEquals(expResult, result);
+        CadastroModel cadastroModel = new CadastroModel();
+        cadastroModel.setOperacao("saida");
+        assertEquals(true, cadastroModel.getOperacao().equals("saida"));
 
     }
 
     @Test
     public void testSetOperacao() {
 
-        String operacao = null;
-        CadastroModel instance = new CadastroModel();
-        instance.setOperacao(operacao);
+        CadastroModel cadastroModel = new CadastroModel();
+        cadastroModel.setOperacao("saida");
+        assertEquals(true, cadastroModel.getOperacao().equals("saida"));
 
     }
 
     @Test
     public void testGetHistorico() {
 
-        CadastroModel instance = new CadastroModel();
-        String expResult = null;
-        String result = instance.getHistorico();
-        assertEquals(expResult, result);
+        CadastroModel cadastroModel = new CadastroModel();
+        cadastroModel.setHistorico("Teste");
+        assertEquals(true, cadastroModel.getHistorico().equals("Teste"));
 
     }
 
     @Test
     public void testSetHistorico() {
 
-        String historico = null;
-        CadastroModel instance = new CadastroModel();
-        instance.setHistorico(historico);
+        CadastroModel cadastroModel = new CadastroModel();
+        cadastroModel.setHistorico("Teste");
+        assertEquals(true, cadastroModel.getHistorico().equals("Teste"));
 
     }
 
     @Test
     public void testGetCategoria() {
 
-        CadastroModel instance = new CadastroModel();
-        String expResult = null;
-        String result = instance.getCategoria();
-        assertEquals(expResult, result);
+        CadastroModel cadastroModel = new CadastroModel();
+        cadastroModel.setCategoria("Contas");
+        assertEquals(true, cadastroModel.getCategoria().equals("Contas"));
 
     }
 
     @Test
     public void testSetCategoria() {
 
-        String categoria = null;
-        CadastroModel instance = new CadastroModel();
-        instance.setCategoria(categoria);
+        CadastroModel cadastroModel = new CadastroModel();
+        cadastroModel.setCategoria("Contas");
+        assertEquals(true, cadastroModel.getCategoria().equals("Contas"));
 
     }
 
     @Test
     public void testGetConta() {
 
-        CadastroModel instance = new CadastroModel();
-        String expResult = null;
-        String result = instance.getConta();
-        assertEquals(expResult, result);
+        CadastroModel cadastroModel = new CadastroModel();
+        cadastroModel.setConta("000001");
+        assertEquals(true, cadastroModel.getConta().equals("000001"));
 
     }
 
     @Test
     public void testSetConta() {
 
-        String conta = null;
-        CadastroModel instance = new CadastroModel();
-        instance.setConta(conta);
+        CadastroModel cadastroModel = new CadastroModel();
+        cadastroModel.setConta("000001");
+        assertEquals(true, cadastroModel.getConta().equals("000001"));
 
     }
 
     @Test
     public void testGetValor() {
 
-        CadastroModel instance = new CadastroModel();
-        String expResult = null;
-        String result = instance.getValor();
-        assertEquals(expResult, result);
+        CadastroModel cadastroModel = new CadastroModel();
+        cadastroModel.setValor("1.99");
+        assertEquals(true, cadastroModel.getValor().equals("1.99"));
 
     }
 
     @Test
     public void testSetValor() {
 
-        String valor = null;
-        CadastroModel instance = new CadastroModel();
-        instance.setValor(valor);
+        CadastroModel cadastroModel = new CadastroModel();
+        cadastroModel.setValor("1.99");
+        assertEquals(true, cadastroModel.getValor().equals("1.99"));
 
     }
 

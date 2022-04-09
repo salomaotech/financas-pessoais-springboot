@@ -50,52 +50,6 @@ public class ControllerPost {
 
     }
 
-    /* mapeia a rota para adicionar um registro (transferencia entre contas) */
-    @PostMapping("/adicionar/transferencia")
-    public String postAdicionaTransferencia(CadastroModel cadastroModel, WebRequest request) {
-
-        /* serviço */
-        CadastroService cadastroService = new CadastroService(cadastroRepository);
-
-        /* formata o valor corretamente com as casas decimais */
-        cadastroModel.setValor(FormataNumero.formatarNumero(cadastroModel.getValor()).toString());
-
-        /* seta a operação */
-        cadastroModel.setOperacao("saida");
-
-        /* seta a categoria */
-        cadastroModel.setCategoria("Transferência");
-
-        /* seta data do registro */
-        cadastroModel.setDataRegistro(LocalDate.now());
-
-        /* valida se conseguiu adicionar */
-        if (cadastroService.adicionar(cadastroModel)) {
-
-            /* conta de destino */
-            CadastroModel contaDestino = new CadastroModel();
-            contaDestino.setDataRegistro(cadastroModel.getDataRegistro());
-            contaDestino.setDataVencimento(cadastroModel.getDataVencimento());
-            contaDestino.setConta(request.getParameter(("contaDestino")));
-            contaDestino.setOperacao("entrada");
-            contaDestino.setHistorico(cadastroModel.getHistorico());
-            contaDestino.setValor(cadastroModel.getValor());
-            contaDestino.setCategoria("Transferência");
-
-            /* adiciona */
-            cadastroService.adicionar(contaDestino);
-
-            /* exibe os dados cadastrados */
-            return "redirect:/pagina_cadastro/" + cadastroService.getId();
-
-        } else {
-
-            /* exibe página de erro */
-            return "redirect:/pagina_erro404/";
-        }
-
-    }
-
     /* mapeia a rota para atualizar um registro */
     @PostMapping("/adicionar/{id}")
     public String postAtualiza(@PathVariable("id") long id, CadastroModel cadastroModel) {
@@ -152,6 +106,52 @@ public class ControllerPost {
             /* exibe a página de deletar */
             return "redirect:/pagina_deleta/" + id;
 
+        }
+
+    }
+
+    /* mapeia a rota para adicionar um registro (transferencia entre contas) */
+    @PostMapping("/adicionar/transferencia")
+    public String postAdicionaTransferencia(CadastroModel cadastroModel, WebRequest request) {
+
+        /* serviço */
+        CadastroService cadastroService = new CadastroService(cadastroRepository);
+
+        /* formata o valor corretamente com as casas decimais */
+        cadastroModel.setValor(FormataNumero.formatarNumero(cadastroModel.getValor()).toString());
+
+        /* seta a operação */
+        cadastroModel.setOperacao("saida");
+
+        /* seta a categoria */
+        cadastroModel.setCategoria("Transferência");
+
+        /* seta data do registro */
+        cadastroModel.setDataRegistro(LocalDate.now());
+
+        /* valida se conseguiu adicionar */
+        if (cadastroService.adicionar(cadastroModel)) {
+
+            /* conta de destino */
+            CadastroModel contaDestino = new CadastroModel();
+            contaDestino.setDataRegistro(cadastroModel.getDataRegistro());
+            contaDestino.setDataVencimento(cadastroModel.getDataVencimento());
+            contaDestino.setConta(request.getParameter(("contaDestino")));
+            contaDestino.setOperacao("entrada");
+            contaDestino.setHistorico(cadastroModel.getHistorico());
+            contaDestino.setValor(cadastroModel.getValor());
+            contaDestino.setCategoria("Transferência");
+
+            /* adiciona */
+            cadastroService.adicionar(contaDestino);
+
+            /* exibe os dados cadastrados */
+            return "redirect:/pagina_cadastro/" + cadastroService.getId();
+
+        } else {
+
+            /* exibe página de erro */
+            return "redirect:/pagina_erro404/";
         }
 
     }

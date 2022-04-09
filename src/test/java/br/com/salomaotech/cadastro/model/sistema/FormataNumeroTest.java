@@ -10,11 +10,12 @@ public class FormataNumeroTest {
     public void testFormatarNumero() {
 
         /* testa as conversões */
-        assertEquals(true, FormataNumero.formatarNumero("0").equals(new BigDecimal("0")));
+        assertEquals(true, FormataNumero.formatarNumero("1").equals(new BigDecimal("1")));
         assertEquals(true, FormataNumero.formatarNumero("abc").equals(new BigDecimal("0")));
         assertEquals(true, FormataNumero.formatarNumero("1,99").equals(new BigDecimal("1.99")));
         assertEquals(true, FormataNumero.formatarNumero("1.999,36").equals(new BigDecimal("1999.36")));
-        assertEquals(false, FormataNumero.formatarNumero("1.999.999.36").equals(new BigDecimal("1999999.36")));
+        assertEquals(true, FormataNumero.formatarNumero("1.999.999.36").equals(new BigDecimal("1999999.36")));
+        assertEquals(true, FormataNumero.formatarNumero("1.333333333333.22,36").equals(new BigDecimal("133333333333322.36")));
 
     }
 

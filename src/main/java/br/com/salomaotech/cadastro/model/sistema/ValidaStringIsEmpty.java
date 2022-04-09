@@ -1,5 +1,10 @@
 package br.com.salomaotech.cadastro.model.sistema;
 
+/**
+ * Validador de Strings
+ *
+ * @author @salomaotech
+ */
 public class ValidaStringIsEmpty {
 
     /**

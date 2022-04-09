@@ -19,7 +19,7 @@ public class ControllerGetTest {
     @Test
     public void testGetErro404() throws Exception {
 
-        /* testa se a model está funcionando */
+        /* testa se o endpoint existe */
         this.mockMvc.perform(get("/pagina_erro404")).andDo(print()).andExpect(status().isOk());
 
     }
@@ -27,8 +27,24 @@ public class ControllerGetTest {
     @Test
     public void testGetCadastra() throws Exception {
 
-        /* testa se a model está funcionando */
+        /* testa se o endpoint existe */
         this.mockMvc.perform(get("/pagina_cadastro")).andDo(print()).andExpect(status().isOk());
+
+    }
+
+    @Test
+    public void testGetAtualiza() throws Exception {
+
+        /* testa se o endpoint existe */
+        this.mockMvc.perform(get("/pagina_cadastro/1")).andDo(print()).andExpect(status().isOk());
+
+    }
+
+    @Test
+    public void testGetDeleta() throws Exception {
+
+        /* testa se o endpoint existe */
+        this.mockMvc.perform(get("/pagina_deleta/1")).andDo(print()).andExpect(status().isOk());
 
     }
 
@@ -39,25 +55,9 @@ public class ControllerGetTest {
     }
 
     @Test
-    public void testGetAtualiza() throws Exception {
-
-        /* testa se a model está funcionando */
-        this.mockMvc.perform(get("/pagina_cadastro/1")).andDo(print()).andExpect(status().isOk());
-
-    }
-
-    @Test
-    public void testGetDeleta() throws Exception {
-
-        /* testa se a model está funcionando */
-        this.mockMvc.perform(get("/pagina_deleta/1")).andDo(print()).andExpect(status().isOk());
-
-    }
-
-    @Test
     public void testGetPesquisaAvancada() throws Exception {
 
-        /* testa se a model está funcionando */
+        /* testa se o endpoint existe */
         this.mockMvc.perform(get("/pagina_busca_avancada")).andDo(print()).andExpect(status().isOk());
 
     }
@@ -65,7 +65,7 @@ public class ControllerGetTest {
     @Test
     public void testGetResultados() throws Exception {
 
-        /* testa se a model está funcionando */
+        /* testa se o endpoint existe */
         this.mockMvc.perform(get("/pagina_resultados")).andDo(print()).andExpect(status().isOk());
 
     }

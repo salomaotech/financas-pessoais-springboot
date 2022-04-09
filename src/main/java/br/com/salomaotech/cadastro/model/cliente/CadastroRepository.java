@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
- * Repositório do Spring
+ * Repositório do banco de dados do Spring
  *
  * @author @salomaotech
  */

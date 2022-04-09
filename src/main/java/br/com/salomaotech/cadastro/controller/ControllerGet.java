@@ -55,25 +55,6 @@ public class ControllerGet {
 
     }
 
-    /* Chama a página de cadastro de transferência */
-    @GetMapping("/pagina_cadastro/transferencia")
-    public ModelAndView getCadastraTransferencia() {
-
-        /* nova ModelAndView */
-        ModelAndView model = new ModelAndView("PaginaCadastroTransferencia");
-
-        /* popula com os dados vazios */
-        model.addObject("cadastro", new CadastroModel());
-
-        /* popula contas, categorias */
-        model.addObject("contas", this.cadastroRepository.getContas());
-        model.addObject("categorias", this.cadastroRepository.getCategorias());
-
-        /* retorna a página */
-        return model;
-
-    }
-
     /* mapeia a rota para a página PaginaCadastro */
     @GetMapping("/pagina_cadastro/{id}")
     public ModelAndView getAtualiza(@PathVariable("id") long id) {
@@ -127,6 +108,25 @@ public class ControllerGet {
             return new ModelAndView("PaginaErro404");
 
         }
+
+    }
+
+    /* Chama a página de cadastro de transferência */
+    @GetMapping("/pagina_cadastro/transferencia")
+    public ModelAndView getCadastraTransferencia() {
+
+        /* nova ModelAndView */
+        ModelAndView model = new ModelAndView("PaginaCadastroTransferencia");
+
+        /* popula com os dados vazios */
+        model.addObject("cadastro", new CadastroModel());
+
+        /* popula contas, categorias */
+        model.addObject("contas", this.cadastroRepository.getContas());
+        model.addObject("categorias", this.cadastroRepository.getCategorias());
+
+        /* retorna a página */
+        return model;
 
     }
 
